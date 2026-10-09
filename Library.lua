@@ -3972,6 +3972,11 @@ do
     function Funcs:AddKeyPicker(Idx, Info)
         if self.Destroyed then return nil end
 
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_keypicker_" .. tostring(#Options + 1))
+        end
+
         Info = Library:Validate(Info, Templates.KeyPicker)
 
         local ParentObj = self
@@ -5162,8 +5167,12 @@ do
     function Funcs:AddColorPicker(Idx, Info)
         if self.Destroyed then return nil end
 
-        Info = Library:Validate(Info, Templates.ColorPicker)
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_colorpicker_" .. tostring(#Options + 1))
+        end
 
+        Info = Library:Validate(Info, Templates.ColorPicker)
         local ParentObj = self
         local ToggleLabel = ParentObj.TextLabel
 
@@ -6424,8 +6433,9 @@ do
             return Info
         end
         local Info = GetInfo(...)
-
-        --// Premium Check（追加）
+        if Info.Idx == nil then
+            Info.Idx = "__auto_button_" .. tostring(#Buttons + 1)
+        end
         local IsPremiumLock = false
         if Info.Premium == true and Library.IsPremiumUser ~= true then
             IsPremiumLock = true
@@ -6922,6 +6932,11 @@ end
     function Funcs:AddCheckbox(Idx, Info)
         if self.Destroyed then return nil end
 
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_checkbox_" .. tostring(#Options + 1))
+        end
+
         Info = Library:Validate(Info, Templates.Toggle)
 
         local Groupbox = self
@@ -7196,6 +7211,11 @@ end
 
     function Funcs:AddToggle(Idx, Info)
         if self.Destroyed then return nil end
+
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_toggle_" .. tostring(#Options + 1))
+        end
 
         if Library.ForceCheckbox then
             return Funcs.AddCheckbox(self, Idx, Info)
@@ -7493,6 +7513,11 @@ end
     function Funcs:AddInput(Idx, Info)
         if self.Destroyed then return nil end
 
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_input_" .. tostring(#Options + 1))
+        end
+
         if typeof(Info) == "table" and (typeof(Info.VerifyValue) == "function" and Info.Finished ~= true) then
             Info.Finished = true
         end
@@ -7749,6 +7774,11 @@ end
 
     function Funcs:AddSlider(Idx, Info)
         if self.Destroyed then return nil end
+
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_slider_" .. tostring(#Options + 1))
+        end
 
         Info = Library:Validate(Info, Templates.Slider)
 
@@ -8199,6 +8229,11 @@ end
 
     function Funcs:AddDropdown(Idx, Info)
         if self.Destroyed then return nil end
+
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_dropdown_" .. tostring(#Options + 1))
+        end
 
         Info = Library:Validate(Info, Templates.Dropdown)
 
@@ -9319,6 +9354,11 @@ end
     function Funcs:AddViewport(Idx, Info)
         if self.Destroyed then return nil end
 
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_viewport_" .. tostring(#Options + 1))
+        end
+
         Info = Library:Validate(Info, Templates.Viewport)
 
         local Groupbox = self
@@ -9614,6 +9654,11 @@ end
     function Funcs:AddImage(Idx, Info)
         if self.Destroyed then return nil end
 
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_image_" .. tostring(#Options + 1))
+        end
+
         Info = Library:Validate(Info, Templates.Image)
 
         local Groupbox = self
@@ -9776,6 +9821,11 @@ end
     function Funcs:AddVideo(Idx, Info)
         if self.Destroyed then return nil end
 
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_video_" .. tostring(#Options + 1))
+        end
+
         Info = Library:Validate(Info, Templates.Video)
 
         local Groupbox = self
@@ -9920,7 +9970,12 @@ end
     function Funcs:AddUIPassthrough(Idx, Info)
         if self.Destroyed then return nil end
 
-        Info = Library:Validate(Info, Templates.UIPassthrough)
+        if typeof(Idx) == "table" and Info == nil then
+            Info = Idx
+            Idx = Info.Idx or ("__auto_uipassthrough_" .. tostring(#Options + 1))
+        end
+
+        Info = Library:Validate(Info, Templates.UIPassthrough)f
 
         local Groupbox = self
         local Container = Groupbox.Container
@@ -10013,9 +10068,13 @@ end
 
         return Passthrough
     end
-
 	function Funcs:AddPlayersDropdown(Idx, Info)
 		if self.Destroyed then return nil end
+
+		if typeof(Idx) == "table" and Info == nil then
+			Info = Idx
+			Idx = Info.Idx or ("__auto_playersdropdown_" .. tostring(#Options + 1))
+		end
 
 		Info = Library:Validate(Info, {
 			Text = "Dropdown",
@@ -10898,6 +10957,11 @@ end
 	end
 	function Funcs:AddDropdownEx(Idx, Info)
 		if self.Destroyed then return nil end
+
+		if typeof(Idx) == "table" and Info == nil then
+			Info = Idx
+			Idx = Info.Idx or ("__auto_dropdownex_" .. tostring(#Options + 1))
+		end
 
 		Info = Library:Validate(Info, {
 			Text = "Dropdown",
