@@ -9975,7 +9975,7 @@ end
             Idx = Info.Idx or ("__auto_uipassthrough_" .. tostring(#Options + 1))
         end
 
-        Info = Library:Validate(Info, Templates.UIPassthrough)f
+        Info = Library:Validate(Info, Templates.UIPassthrough)
 
         local Groupbox = self
         local Container = Groupbox.Container
